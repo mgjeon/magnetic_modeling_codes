@@ -29,6 +29,8 @@
       integer status
       character(DFTI_MAX_MESSAGE_LENGTH) error_message
       logical class_error
+      ! (deprecated parameter)
+      INTEGER, PARAMETER :: DFTI_ERROR_CLASS = 60
 
       class_error = DftiErrorClass(status, DFTI_ERROR_CLASS)
       if (.not. class_error) then

@@ -30,14 +30,14 @@ contains
     use mod_global_parameters
 
     ! normalization unit in CGS Unit
-    k_B = 1.3806d-16          ! erg*K^-1
-    miu0 = 4.d0*dpi           ! Gauss^2 cm^2 dyne^-1
+    k_B = 1.3806d-16          ! erg*K-1
+    miu0 = 4.d0*dpi           ! Gauss2 cm2 dyne-1
     mass_H = 1.67262d-24      ! g
     unit_length        = 1.d9 ! cm
     unit_temperature   = 1.d6 ! K
-    unit_numberdensity = 1.d9 ! cm^-3
-    unit_density       = 1.4d0*mass_H*unit_numberdensity               ! 2.341668000000000E-015 g*cm^-3
-    unit_pressure      = 2.3d0*unit_numberdensity*k_B*unit_temperature ! 0.317538000000000 erg*cm^-3
+    unit_numberdensity = 1.d9 ! cm-3
+    unit_density       = 1.4d0*mass_H*unit_numberdensity               ! 2.341668000000000E-015 g*cm-3
+    unit_pressure      = 2.3d0*unit_numberdensity*k_B*unit_temperature ! 0.317538000000000 erg*cm-3
     unit_magneticfield = dsqrt(miu0*unit_pressure)                     ! 1.99757357615242 Gauss
     unit_velocity      = unit_magneticfield/dsqrt(miu0*unit_density)   ! 1.16448846777562E007 cm/s = 116.45 km/s
     unit_time          = unit_length/unit_velocity                     ! 85.8746159942810 s 
@@ -86,10 +86,10 @@ contains
     endif
   end subroutine initglobaldata_usr
 
-  subroutine initonegrid_usr(ixI^L,ixO^L,w,x)
+  subroutine initonegrid_usr(ixI^L,ixO^L, w,x)
     ! initialize one grid
     use mod_global_parameters
-    integer, intent(in) :: ixI^L,ixO^L
+    integer, intent(in) :: ixI^L,ixO^L 
     double precision, intent(in) :: x(ixI^S,1:ndim)
     double precision, intent(inout) :: w(ixI^S,1:nw)
     double precision :: Bf(ixI^S,1:ndir)
@@ -110,12 +110,12 @@ contains
     ! special boundary types, user defined
     use mod_global_parameters
     use mod_physics
-    integer, intent(in) :: ixO^L, iB, ixI^L
+    integer, intent(in) :: ixO^L, iB, ixI^L 
     double precision, intent(in) :: qt, x(ixI^S,1:ndim)
     double precision, intent(inout) :: w(ixI^S,1:nw)
     double precision :: ft,tfstop,tramp1,tramp2,coeffrho,vlimit,vsign
     double precision :: delxdely,delxdelz,delydelx,delydelz,delzdelx,delzdely
-    double precision :: xlen^D,dxa^D,startpos^D
+    double precision :: xlen^D,dxa^D,startpos^D 
     integer :: ix^D,ixIM^L,ixbc^D,af
 
     select case(iB)
@@ -138,7 +138,7 @@ contains
 
   subroutine getggrav(ggrid,ixI^L,ixO^L,x)
     use mod_global_parameters
-    integer, intent(in)             :: ixI^L, ixO^L
+    integer, intent(in)             :: ixI^L, ixO^L 
     double precision, intent(in)    :: x(ixI^S,1:ndim)
     double precision, intent(out)   :: ggrid(ixI^S)
 
@@ -147,7 +147,7 @@ contains
 
   subroutine gravity(ixI^L,ixO^L,wCT,x,gravity_field)
     use mod_global_parameters
-    integer, intent(in)             :: ixI^L, ixO^L
+    integer, intent(in)             :: ixI^L, ixO^L 
     double precision, intent(in)    :: x(ixI^S,1:ndim)
     double precision, intent(in)    :: wCT(ixI^S,1:nw)
     double precision, intent(out)   :: gravity_field(ixI^S,ndim)
@@ -163,7 +163,7 @@ contains
   ! One can use the coordinate info in x and/or time qt=t_n and w(t_n) values w.
     use mod_global_parameters
 
-    integer, intent(in) :: igrid, level, ixI^L, ixO^L
+    integer, intent(in) :: igrid, level, ixI^L, ixO^L 
     double precision, intent(in) :: qt, w(ixI^S,1:nw), x(ixI^S,1:ndim)
     integer, intent(inout) :: refine, coarsen
 
@@ -176,7 +176,7 @@ contains
 
   subroutine specialvar_output(ixI^L,ixO^L,w,x,normconv)
     use mod_global_parameters
-    integer, intent(in)                :: ixI^L,ixO^L
+    integer, intent(in)                :: ixI^L,ixO^L 
     double precision, intent(in)       :: x(ixI^S,1:ndim)
     double precision                   :: w(ixI^S,nw+nwauxio)
     double precision                   :: normconv(0:nw+nwauxio)
@@ -673,7 +673,7 @@ use mod_calculate_xw
 integer, intent(in) :: qunit, igrid
 double precision, intent(in), dimension(ixMlo^D-1:ixMhi^D,ndim) :: xC
 double precision, intent(in), dimension(ixMlo^D:ixMhi^D,ndim)   :: xCC
-integer :: ixC^L,ixCC^L
+integer :: ixC^L,ixCC^L 
 logical, intent(in) :: first
 
 double precision, dimension(ixMlo^D-1:ixMhi^D,ndim) :: xC_TMP
@@ -686,7 +686,7 @@ double precision :: ldw(ixG^T), dwC(ixG^T)
 double precision, dimension(ixMlo^D-1:ixMhi^D,nw+nwauxio)   :: wC
 double precision, dimension(ixMlo^D:ixMhi^D,nw+nwauxio)     :: wCC
 double precision, dimension(ixG^T,1:nw+nwauxio)   :: w
-double precision :: dx^D
+double precision :: dx^D 
 integer :: nxCC^D,idims,jxC^L,iwe
 integer :: nx^D, nxC^D, ix^D, ix, iw, level, idir
 logical, save :: subfirst=.true.
@@ -837,7 +837,7 @@ end subroutine calc_grid_usr
   double precision, intent(out)     :: xC(ixMlo^D-1:ixMhi^D,ndim)
   double precision, intent(out)     :: xCC(ixMlo^D:ixMhi^D,ndim)
   ! .. local ..
-  integer                           :: ixC^L, ixCC^L, idims, level, ix^D
+  integer                           :: ixC^L, ixCC^L, idims, level, ix^D 
   double precision   :: phi11,theta11,r11,rr,x11,y11,z11,x22,y22,z22
 
   level=node(plevel_,igrid)

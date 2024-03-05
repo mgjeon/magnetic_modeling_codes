@@ -3,7 +3,7 @@ module mod_usr  ! computing nonlinear force-free field
   implicit none
   ! variables for boundary condition
   double precision, allocatable, save :: Bx0(:,:),By0(:,:),Bz0(:,:)
-  integer, save :: nx1,nx2,nxbc^D
+  integer, save :: nx1,nx2,nxbc^D 
   ! some global parameters
   double precision :: k_B,miu0,mass_H,usr_grav,SRadius,rhob,Tiso
 
@@ -36,14 +36,14 @@ contains
     use mod_global_parameters
 
     ! normalization unit in CGS Unit
-    k_B = 1.3806d-16          ! erg*K^-1
-    miu0 = 4.d0*dpi           ! Gauss^2 cm^2 dyne^-1
+    k_B = 1.3806d-16          ! erg*K-1 
+    miu0 = 4.d0*dpi           ! Gauss2 cm2 dyne-1 
     mass_H = 1.67262d-24      ! g
     unit_length        = 1.d9 ! cm
     unit_temperature   = 1.d6 ! K
-    unit_numberdensity = 1.d9 ! cm^-3
-    unit_density       = 1.4d0*mass_H*unit_numberdensity               ! 2.341668000000000E-015 g*cm^-3
-    unit_pressure      = 2.3d0*unit_numberdensity*k_B*unit_temperature ! 0.317538000000000 erg*cm^-3
+    unit_numberdensity = 1.d9 ! cm-3
+    unit_density       = 1.4d0*mass_H*unit_numberdensity               ! 2.341668000000000E-015 g*cm-3
+    unit_pressure      = 2.3d0*unit_numberdensity*k_B*unit_temperature ! 0.317538000000000 erg*cm-3
     unit_magneticfield = dsqrt(miu0*unit_pressure)                     ! 1.99757357615242 Gauss
     unit_velocity      = unit_magneticfield/dsqrt(miu0*unit_density)   ! 1.16448846777562E007 cm/s = 116.45 km/s
     unit_time          = unit_length/unit_velocity                     ! 85.8746159942810 s 
@@ -119,7 +119,7 @@ contains
     ! special boundary types, user defined
     use mod_global_parameters
     use mod_physics
-    integer, intent(in) :: ixO^L, iB, ixI^L
+    integer, intent(in) :: ixO^L, iB, ixI^L 
     double precision, intent(in) :: qt, x(ixI^S,1:ndim)
     double precision, intent(inout) :: w(ixI^S,1:nw)
     double precision :: delxdely,delxdelz,delydelx,delydelz,delzdelx,delzdely
@@ -240,7 +240,7 @@ contains
   !==============================================================================
   subroutine getggrav(ggrid,ixI^L,ixO^L,x)
     use mod_global_parameters
-    integer, intent(in)             :: ixI^L, ixO^L
+    integer, intent(in)             :: ixI^L, ixO^L 
     double precision, intent(in)    :: x(ixI^S,1:ndim)
     double precision, intent(out)   :: ggrid(ixI^S)
 
@@ -252,7 +252,7 @@ contains
   !==============================================================================
   subroutine gravity(ixI^L,ixO^L,wCT,x,gravity_field)
     use mod_global_parameters
-    integer, intent(in)             :: ixI^L, ixO^L
+    integer, intent(in)             :: ixI^L, ixO^L 
     double precision, intent(in)    :: x(ixI^S,1:ndim)
     double precision, intent(in)    :: wCT(ixI^S,1:nw)
     double precision, intent(out)   :: gravity_field(ixI^S,ndim)
@@ -270,7 +270,7 @@ contains
   subroutine special_refine_grid(igrid,level,ixI^L,ixO^L,qt,w,x,refine,coarsen)
     use mod_global_parameters
 
-    integer, intent(in) :: igrid, level, ixI^L, ixO^L
+    integer, intent(in) :: igrid, level, ixI^L, ixO^L 
     double precision, intent(in) :: qt, w(ixI^S,1:nw), x(ixI^S,1:ndim)
     integer, intent(inout) :: refine, coarsen
 
@@ -292,7 +292,7 @@ contains
   !==============================================================================
   subroutine specialvar_output(ixI^L,ixO^L,w,x,normconv)
     use mod_global_parameters
-    integer, intent(in)                :: ixI^L,ixO^L
+    integer, intent(in)                :: ixI^L,ixO^L 
     double precision, intent(in)       :: x(ixI^S,1:ndim)
     double precision                   :: w(ixI^S,nw+nwauxio)
     double precision                   :: normconv(0:nw+nwauxio)
